@@ -3,9 +3,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +18,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.ltdd_finalproject.Adapter.PhotoAdapter;
 import com.example.ltdd_finalproject.Adapter.XeAdapter;
+import com.example.ltdd_finalproject.Api.ApiService;
 import com.example.ltdd_finalproject.Model.Photo;
 import com.example.ltdd_finalproject.Model.Xe;
+import com.example.ltdd_finalproject.Model.apiXe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -39,6 +46,10 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rcvXe;
     private XeAdapter mXeAdapter;
+
+    private List<Xe> mListXe;
+
+    private apiXe xes;
 
 
     @Nullable
@@ -56,14 +67,11 @@ public class HomeFragment extends Fragment {
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlideImage();
 
+
+
         rcvXe= mView.findViewById(R.id.rcv_xe);
-        mXeAdapter= new XeAdapter(requireContext());
 
-        GridLayoutManager gridLayoutManager= new GridLayoutManager(requireContext(), 3);
-        rcvXe.setLayoutManager(gridLayoutManager);
-
-        mXeAdapter.setData(getListUser());
-        rcvXe.setAdapter(mXeAdapter);
+        callApiGetListXe();
 
 
 
@@ -71,23 +79,46 @@ public class HomeFragment extends Fragment {
         return mView;
     }
 
-    private List<Xe> getListUser() {
-        List<Xe> list= new ArrayList<>();
-        list.add(new Xe(R.drawable.image1, "Xe 01"));
-        list.add(new Xe(R.drawable.image2, "Xe 02"));
-        list.add(new Xe(R.drawable.image3, "Xe 03"));
-        list.add(new Xe(R.drawable.image1, "Xe 04"));
-        list.add(new Xe(R.drawable.image2, "Xe 05"));
-        list.add(new Xe(R.drawable.image3, "Xe 06"));
-        list.add(new Xe(R.drawable.image3, "Xe 07"));
-        list.add(new Xe(R.drawable.image2, "Xe 08"));
-        list.add(new Xe(R.drawable.image1, "Xe 09"));
-        list.add(new Xe(R.drawable.image3, "Xe 10"));
-        list.add(new Xe(R.drawable.image2, "Xe 11"));
-        list.add(new Xe(R.drawable.image2, "Xe 12"));
+    private void callApiGetListXe(){
+        ApiService.apiService.getListXe().enqueue(new Callback<apiXe>() {
+            @Override
+            public void onResponse(Call<apiXe> call, Response<apiXe> response) {
+                Toast.makeText(requireContext(), "Call api success", Toast.LENGTH_SHORT).show();
+                mListXe= new ArrayList<>();
+                mListXe= response.body().getXe();
+                Log.e("nd", String.valueOf(mListXe.size()));
+                mXeAdapter= new XeAdapter(requireContext(), mListXe);
+                GridLayoutManager gridLayoutManager= new GridLayoutManager(requireContext(), 3);
+                rcvXe.setLayoutManager(gridLayoutManager);
+                mXeAdapter.setData(mListXe);
+                rcvXe.setAdapter(mXeAdapter);
+            }
 
-        return list;
+            @Override
+            public void onFailure(Call<apiXe> call, Throwable t) {
+                Toast.makeText(requireContext(), "onFailure", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
+
+//    private List<Xe> getListUser() {
+//        List<Xe> list= new ArrayList<>();
+//        list.add(new Xe(R.drawable.image1, "Xe 01"));
+//        list.add(new Xe(R.drawable.image2, "Xe 02"));
+//        list.add(new Xe(R.drawable.image3, "Xe 03"));
+//        list.add(new Xe(R.drawable.image1, "Xe 04"));
+//        list.add(new Xe(R.drawable.image2, "Xe 05"));
+//        list.add(new Xe(R.drawable.image3, "Xe 06"));
+//        list.add(new Xe(R.drawable.image3, "Xe 07"));
+//        list.add(new Xe(R.drawable.image2, "Xe 08"));
+//        list.add(new Xe(R.drawable.image1, "Xe 09"));
+//        list.add(new Xe(R.drawable.image3, "Xe 10"));
+//        list.add(new Xe(R.drawable.image2, "Xe 11"));
+//        list.add(new Xe(R.drawable.image2, "Xe 12"));
+//
+//        return list;
+//    }
 
     private List<Photo> getListPhoto(){
         List<Photo> list= new ArrayList<>();
@@ -132,6 +163,9 @@ public class HomeFragment extends Fragment {
         if(mTimer != null){
             mTimer.cancel();
             mTimer= null;
+        }
+        if(mXeAdapter !=null){
+            mXeAdapter.release();
         }
     }
 

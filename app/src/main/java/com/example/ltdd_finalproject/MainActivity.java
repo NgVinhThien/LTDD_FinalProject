@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ltdd_finalproject.Api.ApiService;
+import com.example.ltdd_finalproject.Model.Login;
 import com.example.ltdd_finalproject.Model.Login_dl;
 
 import retrofit2.Callback;
@@ -52,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void sendloginRequest(){
 //        LoginInfo loginInfo= new LoginInfo("thien1@gmail.com", "123");
-        ApiService.apiService.loginRequest("thien1@gmail.com", "123").enqueue(new Callback<Login_dl>() {
+        ApiService.apiService.loginRequest("thien1@gmail.com", "123").enqueue(new Callback<Login>() {
             @Override
-            public void onResponse(retrofit2.Call<Login_dl> call, Response<Login_dl> response) {
+            public void onResponse(retrofit2.Call<Login> call, Response<Login> response) {
                 Toast.makeText(MainActivity.this, "Call api success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(retrofit2.Call<Login_dl> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Login> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Call api error", Toast.LENGTH_SHORT).show();
             }
         });
