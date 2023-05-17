@@ -43,13 +43,13 @@ public class XeAdapter extends RecyclerView.Adapter<XeAdapter.XeViewHolder> {
     }
     @Override
     public void onBindViewHolder(@NonNull XeViewHolder holder, int position) {
-        final Xe xe= mListXe.get(position);
+        Xe xe= mListXe.get(position);
         if(xe == null){
             return;
         }
 //        holder.img_xe.setImageResource(xe.getResourceImg());
         holder.tv_name.setText(xe.getTen_xe());
-        Glide.with(holder.itemView.getContext()).load(xe.getMau()).into(holder.img_xe);
+        Glide.with(holder.itemView.getContext()).load(xe.getLien_ket_anh()).into(holder.img_xe);
 
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

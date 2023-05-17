@@ -67,14 +67,9 @@ public class HomeFragment extends Fragment {
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlideImage();
 
-
-
         rcvXe= mView.findViewById(R.id.rcv_xe);
 
         callApiGetListXe();
-
-
-
 
         return mView;
     }
@@ -101,24 +96,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
-//    private List<Xe> getListUser() {
-//        List<Xe> list= new ArrayList<>();
-//        list.add(new Xe(R.drawable.image1, "Xe 01"));
-//        list.add(new Xe(R.drawable.image2, "Xe 02"));
-//        list.add(new Xe(R.drawable.image3, "Xe 03"));
-//        list.add(new Xe(R.drawable.image1, "Xe 04"));
-//        list.add(new Xe(R.drawable.image2, "Xe 05"));
-//        list.add(new Xe(R.drawable.image3, "Xe 06"));
-//        list.add(new Xe(R.drawable.image3, "Xe 07"));
-//        list.add(new Xe(R.drawable.image2, "Xe 08"));
-//        list.add(new Xe(R.drawable.image1, "Xe 09"));
-//        list.add(new Xe(R.drawable.image3, "Xe 10"));
-//        list.add(new Xe(R.drawable.image2, "Xe 11"));
-//        list.add(new Xe(R.drawable.image2, "Xe 12"));
-//
-//        return list;
-//    }
 
     private List<Photo> getListPhoto(){
         List<Photo> list= new ArrayList<>();

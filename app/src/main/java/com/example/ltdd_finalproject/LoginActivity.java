@@ -2,8 +2,8 @@ package com.example.ltdd_finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.ltdd_finalproject.Api.ApiService;
 import com.example.ltdd_finalproject.Model.Login;
-import com.example.ltdd_finalproject.Model.Login_dl;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,23 +40,26 @@ public class LoginActivity extends AppCompatActivity {
                 String pass= edtPassword.getText().toString();
 
                 sendloginRequest(email, pass);
-//                Intent intent= new Intent(LoginActivity.this, HomeActivity.class);
-//                startActivity(intent);
+
             }
         });
 
     }
 
     private void sendloginRequest(String email, String pass){
-//        LoginInfo loginInfo= new LoginInfo("thien1@gmail.com", "123");
 
-        Log.e("nd", email);
-        Log.e("nd", pass);
         ApiService.apiService.loginRequest(email, pass).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
                 Toast.makeText(LoginActivity.this, "Call api success", Toast.LENGTH_SHORT).show();
-
+                Login loginData= response.body();
+                if(loginData.isSuccess()){
+                    Intent intent= new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

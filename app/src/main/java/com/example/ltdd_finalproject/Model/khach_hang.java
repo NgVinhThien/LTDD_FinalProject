@@ -1,11 +1,19 @@
 package com.example.ltdd_finalproject.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class khach_hang {
+    @SerializedName("id")
     private int id;
+    @SerializedName("ho_ten")
     private String ho_ten;
+    @SerializedName("dia_chi")
     private String dia_chi;
+    @SerializedName("sdt")
     private String sdt;
+    @SerializedName("email")
     private String email;
+    @SerializedName("password")
     private String password;
 
     public khach_hang() {
