@@ -1,31 +1,18 @@
 package com.example.ltdd_finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ltdd_finalproject.Adapter.PhotoAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.ltdd_finalproject.Api.ApiService;
-import com.example.ltdd_finalproject.Model.Login;
 import com.example.ltdd_finalproject.Model.Login_dl;
-import com.example.ltdd_finalproject.Model.Photo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import me.relex.circleindicator.CircleIndicator;
-import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -67,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
 //        LoginInfo loginInfo= new LoginInfo("thien1@gmail.com", "123");
         ApiService.apiService.loginRequest("thien1@gmail.com", "123").enqueue(new Callback<Login_dl>() {
             @Override
-            public void onResponse(Call<Login_dl> call, Response<Login_dl> response) {
+            public void onResponse(retrofit2.Call<Login_dl> call, Response<Login_dl> response) {
                 Toast.makeText(MainActivity.this, "Call api success", Toast.LENGTH_SHORT).show();
-
             }
+
             @Override
-            public void onFailure(Call<Login_dl> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Login_dl> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Call api error", Toast.LENGTH_SHORT).show();
             }
         });
