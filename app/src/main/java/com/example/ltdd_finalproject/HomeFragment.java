@@ -10,10 +10,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ltdd_finalproject.Adapter.PhotoAdapter;
+import com.example.ltdd_finalproject.Adapter.XeAdapter;
 import com.example.ltdd_finalproject.Model.Photo;
+import com.example.ltdd_finalproject.Model.Xe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,9 @@ public class HomeFragment extends Fragment {
     private List<Photo> mListPhoto;
     private Timer mTimer;
 
+    private RecyclerView rcvXe;
+    private XeAdapter mXeAdapter;
+
 
     @Nullable
     @Override
@@ -49,8 +56,37 @@ public class HomeFragment extends Fragment {
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlideImage();
 
+        rcvXe= mView.findViewById(R.id.rcv_xe);
+        mXeAdapter= new XeAdapter(requireContext());
+
+        GridLayoutManager gridLayoutManager= new GridLayoutManager(requireContext(), 3);
+        rcvXe.setLayoutManager(gridLayoutManager);
+
+        mXeAdapter.setData(getListUser());
+        rcvXe.setAdapter(mXeAdapter);
+
+
+
 
         return mView;
+    }
+
+    private List<Xe> getListUser() {
+        List<Xe> list= new ArrayList<>();
+        list.add(new Xe(R.drawable.image1, "Xe 01"));
+        list.add(new Xe(R.drawable.image2, "Xe 02"));
+        list.add(new Xe(R.drawable.image3, "Xe 03"));
+        list.add(new Xe(R.drawable.image1, "Xe 04"));
+        list.add(new Xe(R.drawable.image2, "Xe 05"));
+        list.add(new Xe(R.drawable.image3, "Xe 06"));
+        list.add(new Xe(R.drawable.image3, "Xe 07"));
+        list.add(new Xe(R.drawable.image2, "Xe 08"));
+        list.add(new Xe(R.drawable.image1, "Xe 09"));
+        list.add(new Xe(R.drawable.image3, "Xe 10"));
+        list.add(new Xe(R.drawable.image2, "Xe 11"));
+        list.add(new Xe(R.drawable.image2, "Xe 12"));
+
+        return list;
     }
 
     private List<Photo> getListPhoto(){
@@ -90,7 +126,6 @@ public class HomeFragment extends Fragment {
             }
         }, 9000, 6000);
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
