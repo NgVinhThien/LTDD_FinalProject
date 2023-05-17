@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LTDD_FinalProject</string>
+    <string name="action_home">Trang chủ</string>
+    <string name="action_category">Danh mục</string>
+    <string name="action_bill">Đơn hàng</string>
+    <string name="action_account">Tài khoản</string>
 </resources>
