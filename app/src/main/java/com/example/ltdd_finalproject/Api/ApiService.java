@@ -1,12 +1,16 @@
 package com.example.ltdd_finalproject.Api;
 
 
+import com.example.ltdd_finalproject.Model.DanhMuc;
+import com.example.ltdd_finalproject.Model.HangXe;
 import com.example.ltdd_finalproject.Model.Login;
 import com.example.ltdd_finalproject.Model.apiHoadon;
 import com.example.ltdd_finalproject.Model.apiSignUp;
 import com.example.ltdd_finalproject.Model.apiXe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -39,4 +43,8 @@ public interface ApiService {
 
     @GET("/hoadon")
     Call<apiHoadon> getHoadon(@Header("authorization") String token);
+    @GET("/hangxe")
+    Call<List<HangXe>> getListHangXe();
+    @GET("/danhmuc")
+    Call<List<DanhMuc>> getListDanhMuc();
 }

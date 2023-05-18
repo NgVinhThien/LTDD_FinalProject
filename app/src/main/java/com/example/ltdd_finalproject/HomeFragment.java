@@ -48,15 +48,11 @@ public class HomeFragment extends Fragment {
     private Timer mTimer;
 
     private RecyclerView rcvXe;
-    private RecyclerView rcvDanhMuc;
-    private RecyclerView rcvHangXe;
+
     private XeAdapter mXeAdapter;
-    private DanhMucAdapter mDanhMucAdapter;
-    private HangXeAdapter mHangXeAdapter;
+
     private List<Xe> mListXe;
-    private List<DanhMuc> mListDanhMuc;
-    private List<HangXe> mListHangXe;
-    private apiXe xes;
+
 
 
     @Nullable
@@ -74,55 +70,9 @@ public class HomeFragment extends Fragment {
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlideImage();
 
-        rcvDanhMuc =  mView.findViewById(R.id.rcv_category);
-        callApiGetListDanhMuc();
-        rcvHangXe = mView.findViewById(R.id.rcv_company);
-        callApiGetListHangXe();
         rcvXe =  mView.findViewById(R.id.rcv_xe);
         callApiGetListXe();
         return mView;
-    }
-    private void callApiGetListDanhMuc(){
-        ApiService.apiService.getListDanhMuc().enqueue(new Callback<List<DanhMuc>>() {
-            @Override
-            public void onResponse(Call<List<DanhMuc>> call, Response<List<DanhMuc>> response) {
-                if(response.isSuccessful()) {
-                    mListDanhMuc = response.body();
-                    mDanhMucAdapter = new DanhMucAdapter(requireContext(), mListDanhMuc);
-                    rcvDanhMuc.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-                    rcvDanhMuc.setLayoutManager(layoutManager);
-                    rcvDanhMuc.setAdapter(mDanhMucAdapter);
-                    mDanhMucAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<DanhMuc>> call, Throwable t) {
-                Log.d("logg", t.getMessage());
-            }
-        });
-    }
-    private void callApiGetListHangXe(){
-        ApiService.apiService.getListHangXe().enqueue(new Callback<List<HangXe>>() {
-            @Override
-            public void onResponse(Call<List<HangXe>> call, Response<List<HangXe>> response) {
-                if(response.isSuccessful()) {
-                    mListHangXe = response.body();
-                    mHangXeAdapter = new HangXeAdapter(requireContext(), mListHangXe);
-                    rcvHangXe.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-                    rcvHangXe.setLayoutManager(layoutManager);
-                    rcvHangXe.setAdapter(mHangXeAdapter);
-                    mHangXeAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<HangXe>> call, Throwable t) {
-                Log.d("logg", t.getMessage());
-            }
-        });
     }
     private void callApiGetListXe(){
         ApiService.apiService.getListXe().enqueue(new Callback<apiXe>() {
