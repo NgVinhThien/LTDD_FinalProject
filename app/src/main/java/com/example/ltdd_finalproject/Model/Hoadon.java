@@ -2,6 +2,7 @@ package com.example.ltdd_finalproject.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.security.Timestamp;
 import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 
@@ -13,14 +14,14 @@ public class Hoadon {
     @SerializedName("id_xe")
     private int id_xe;
     @SerializedName("ngay_dat")
-    private Date ngay_dat;
+    private String ngay_dat;
     @SerializedName("ngay_nhan")
-    private Date ngay_nhan;
+    private String ngay_nhan;
 
     public Hoadon() {
     }
 
-    public Hoadon(int id, int id_khach_hang, int id_xe, Date ngay_dat, Date ngay_nhan) {
+    public Hoadon(int id, int id_khach_hang, int id_xe, String ngay_dat, String ngay_nhan) {
         this.id = id;
         this.id_khach_hang = id_khach_hang;
         this.id_xe = id_xe;
@@ -52,19 +53,19 @@ public class Hoadon {
         this.id_xe = id_xe;
     }
 
-    public Date getNgay_dat() {
+    public String getNgay_dat() {
         return ngay_dat;
     }
 
-    public void setNgay_dat(Date ngay_dat) {
+    public void setNgay_dat(String ngay_dat) {
         this.ngay_dat = ngay_dat;
     }
 
-    public Date getNgay_nhan() {
+    public String getNgay_nhan() {
         return ngay_nhan;
     }
 
-    public void setNgay_nhan(Date ngay_nhan) {
+    public void setNgay_nhan(String ngay_nhan) {
         this.ngay_nhan = ngay_nhan;
     }
 }
