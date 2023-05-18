@@ -10,5 +10,4 @@
         android:text="Account page"
         android:textSize="30dp"
         android:textColor="@color/white"/>
-
 </LinearLayout>
