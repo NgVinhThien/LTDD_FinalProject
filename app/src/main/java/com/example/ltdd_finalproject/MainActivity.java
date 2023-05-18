@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ltdd_finalproject.Api.ApiService;
 import com.example.ltdd_finalproject.Model.Login;
+import com.example.ltdd_finalproject.Model.khach_hang;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private LinearLayout linearlayout;
     private TextView textSignup;
-
     private EditText edtEmail;
     private EditText edtPassword;
 
@@ -41,14 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 textSignup= linearlayout.findViewById(R.id.textSignup);
                 edtPassword= findViewById(R.id.etPass);
                 edtEmail= findViewById(R.id.etText);
-
                 btnLogin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         Toast.makeText(MainActivity.this, "Pressed Log in", Toast.LENGTH_SHORT).show();
                         sendloginRequest();
-
                     }
                 });
                 textSignup.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-
             }
             else{
                 Intent intent= new Intent(MainActivity.this, HomeActivity.class);
@@ -75,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Login> call, Response<Login> response) {
                         if(response.body()!= null && response.body().isSuccess()){
+                            DataLocalManager.setToken(response.body().getToken());
+                            List<khach_hang> listKH= new ArrayList<>();
+                            listKH= response.body().getKhach_hangs();
+                            DataLocalManager.setIdKH(listKH.get(0).getId());
                             Intent intent= new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
@@ -82,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<Login> call, Throwable t) {
                         Toast.makeText(MainActivity.this, "Call api error", Toast.LENGTH_SHORT).show();

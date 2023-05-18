@@ -4,6 +4,9 @@ import android.content.Context;
 
 public class DataLocalManager {
     private static final String PREF_FIRST_INSTALL= "PREF_FIRST_INSTALL";
+    private static final String PREF_TOKEN= "PREF_TOKEN";
+    private static final String PREF_IDKH= "PREF_IDKH";
+
     private static DataLocalManager instance;
     private MySharePreferences mySharePreferences;
 
@@ -26,4 +29,17 @@ public class DataLocalManager {
     public static boolean getFirstInstall(){
         return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(PREF_FIRST_INSTALL);
     }
+    public static void setToken(String token){
+        DataLocalManager.getInstance().mySharePreferences.putStringValue(PREF_TOKEN, token);
+    }
+    public static String getToken(){
+        return DataLocalManager.getInstance().mySharePreferences.getStringValue(PREF_TOKEN);
+    }
+    public static void setIdKH(int value){
+        DataLocalManager.getInstance().mySharePreferences.putIntValue(PREF_IDKH, value);
+    }
+    public static int getIdKH(){
+        return DataLocalManager.getInstance().mySharePreferences.getIntValue(PREF_TOKEN);
+    }
+
 }

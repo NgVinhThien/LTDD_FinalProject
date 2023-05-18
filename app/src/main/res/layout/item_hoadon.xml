@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_hoadon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imv_hoadon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/image4"
+            android:scaleType="centerCrop"/>
+        <LinearLayout
+            android:id="@+id/layout_hoadon_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_tenxe"
+                android:layout_width="match_parent"
+                android:paddingStart="5dp"
+                android:layout_height="wrap_content"
+                android:text="tên xe"
+                android:textSize="25sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_ngaynhan"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:paddingStart="5dp"
+                android:layout_height="wrap_content"
+                android:text="Ngày đặt"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

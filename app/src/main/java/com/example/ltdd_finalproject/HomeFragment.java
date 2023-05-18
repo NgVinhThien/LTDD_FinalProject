@@ -131,7 +131,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(requireContext(), "Call api success", Toast.LENGTH_SHORT).show();
                 mListXe= new ArrayList<>();
                 mListXe= response.body().getXe();
-                Log.e("nd", String.valueOf(mListXe.size()));
                 mXeAdapter= new XeAdapter(requireContext(), mListXe);
                 GridLayoutManager gridLayoutManager= new GridLayoutManager(requireContext(), 3);
                 rcvXe.setLayoutManager(gridLayoutManager);

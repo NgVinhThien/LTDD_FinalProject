@@ -2,96 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/design_default_color_secondary">
-
+    android:orientation="vertical">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hoá đơn"
+        android:text="Hóa đơn"
         android:textSize="30dp"
-        android:textColor="@color/white"
-        android:layout_margin="16dp"/>
-
-    <TextView
-        android:id="@+id/txt_product_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tên xe:"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_name"
+        android:padding="16dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bills_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="XE PRO VIP"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_product_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Màu sắc:"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="16dp" />
-
-    <ImageView
-        android:id="@+id/image_color1"
-        android:layout_width="107dp"
-        android:layout_height="53dp"
-        android:padding="16dp"
-        android:src="@color/black"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-    <TextView
-        android:id="@+id/txt_product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Giá cả:"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="20.00000 VNĐ"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_order_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ngày đặt:"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="15/05/2023"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_delivery_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ngày nhận:"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="16dp" />
-    <TextView
-        android:id="@+id/txt_delivery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="20/05/2023"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:padding="16dp" />
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"/>
 </LinearLayout>

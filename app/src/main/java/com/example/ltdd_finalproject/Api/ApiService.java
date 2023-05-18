@@ -1,15 +1,12 @@
 package com.example.ltdd_finalproject.Api;
 
 
-import com.example.ltdd_finalproject.Model.DanhMuc;
-import com.example.ltdd_finalproject.Model.HangXe;
 import com.example.ltdd_finalproject.Model.Login;
+import com.example.ltdd_finalproject.Model.apiHoadon;
 import com.example.ltdd_finalproject.Model.apiSignUp;
 import com.example.ltdd_finalproject.Model.apiXe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -17,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface ApiService {
@@ -38,8 +36,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/signUp")
     Call<apiSignUp> signUpRequest(@Field("ho_ten") String ho_ten, @Field("dia_chi") String dia_chi, @Field("sdt") String sdt, @Field("email") String email, @Field("password") String password);
-    @GET("/danhmuc")
-    Call<List<DanhMuc>> getListDanhMuc();
-    @GET("/hangxe")
-    Call<List<HangXe>> getListHangXe();
+
+    @GET("/hoadon")
+    Call<apiHoadon> getHoadon(@Header("authorization") String token);
 }
