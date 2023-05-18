@@ -13,20 +13,19 @@ public class khach_hang {
     private String sdt;
     @SerializedName("email")
     private String email;
-    @SerializedName("password")
-    private String password;
+
 
     public khach_hang() {
     }
 
-    public khach_hang(int id, String ho_ten, String dia_chi, String sdt, String email, String password) {
+    public khach_hang(int id, String ho_ten, String dia_chi, String sdt, String email) {
         this.id = id;
         this.ho_ten = ho_ten;
         this.dia_chi = dia_chi;
         this.sdt = sdt;
         this.email = email;
-        this.password = password;
     }
+
 
     public int getId() {
         return id;
@@ -68,11 +67,6 @@ public class khach_hang {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
 }

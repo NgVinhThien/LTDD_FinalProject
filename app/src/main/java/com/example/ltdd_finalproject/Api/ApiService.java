@@ -4,6 +4,7 @@ package com.example.ltdd_finalproject.Api;
 import com.example.ltdd_finalproject.Model.DanhMuc;
 import com.example.ltdd_finalproject.Model.HangXe;
 import com.example.ltdd_finalproject.Model.Login;
+import com.example.ltdd_finalproject.Model.Xe;
 import com.example.ltdd_finalproject.Model.apiHoadon;
 import com.example.ltdd_finalproject.Model.apiSignUp;
 import com.example.ltdd_finalproject.Model.apiXe;
@@ -20,6 +21,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiService {
     //https://api-xe.onrender.com/xe/all
@@ -47,4 +49,7 @@ public interface ApiService {
     Call<List<HangXe>> getListHangXe();
     @GET("/danhmuc")
     Call<List<DanhMuc>> getListDanhMuc();
+
+    @GET("danhmuc/{id}")
+    Call<List<Xe>> getDanhMuc(@Path("id") int id);
 }

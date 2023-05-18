@@ -33,6 +33,9 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false"/>
+        <activity
+            android:name=".DanhMucIdActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

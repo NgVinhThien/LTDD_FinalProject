@@ -1,6 +1,7 @@
 package com.example.ltdd_finalproject.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ltdd_finalproject.DanhMucIdActivity;
 import com.example.ltdd_finalproject.Model.DanhMuc;
 import com.example.ltdd_finalproject.R;
 
 import java.util.List;
 
 public class DanhMucAdapter extends RecyclerView.Adapter<DanhMucAdapter.DanhmucViewHolder> {
+    DanhMuc danhMuc;
     private Context mContext;
     private List<DanhMuc> mListDanhMuc;
 
@@ -45,7 +48,15 @@ public class DanhMucAdapter extends RecyclerView.Adapter<DanhMucAdapter.DanhmucV
             return;
         }
         holder.tv_name_category.setText(danhMuc.getTen_danh_muc());
-        Glide.with(mContext).load(danhMuc.getAnh_dai_dien()).into(holder.img_category);
+        Glide.with(holder.itemView.getContext()).load(danhMuc.getAnh_dai_dien()).into(holder.img_category);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, DanhMucIdActivity.class);
+                intent.putExtra("id_danh_muc", danhMuc.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,13 +66,12 @@ public class DanhMucAdapter extends RecyclerView.Adapter<DanhMucAdapter.DanhmucV
         }
         return 0;
     }
-
     public class DanhmucViewHolder extends RecyclerView.ViewHolder {
         private ImageView img_category;
         private TextView tv_name_category;
-
         public DanhmucViewHolder(@NonNull View itemView) {
             super(itemView);
+
             img_category = itemView.findViewById(R.id.image_category);
             tv_name_category = itemView.findViewById(R.id.category_name);
         }
