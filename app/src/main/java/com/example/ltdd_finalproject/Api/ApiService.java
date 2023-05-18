@@ -12,7 +12,8 @@ import com.example.ltdd_finalproject.Model.apiXe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,6 +57,6 @@ public interface ApiService {
     Call<List<Xe>> getDanhMuc(@Path("id") int id);
     @FormUrlEncoded
     @POST("/themhoadon")
-    Call<apiThemHD> addHD(@Header("authorization") String token, @Field("id_xe") int id_xe, @Field("ngay_dat")Timestamp ngay_dat, @Field("ngay_nhan") Timestamp ngay_nhan);
+    Call<apiThemHD> addHD(@Header("authorization") String token, @Field("id_xe") int id_xe, @Field("ngay_dat") Date ngay_dat, @Field("ngay_nhan") Date ngay_nhan);
 
 }

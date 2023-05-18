@@ -14,6 +14,14 @@ import com.example.ltdd_finalproject.Api.ApiService;
 import com.example.ltdd_finalproject.Model.Xe;
 import com.example.ltdd_finalproject.Model.apiThemHD;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,17 +58,34 @@ public class DetailActivity extends AppCompatActivity {
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String token= DataLocalManager.getToken();
-                int id_xe= xe.getId();
-                ApiService.apiService.addHD(token, id_xe, null, null).enqueue(new Callback<apiThemHD>() {
+                String token = DataLocalManager.getToken();
+                int id_xe = xe.getId();
+                String id = String.valueOf(id_xe);
+                String timestampString = "2023-05-19";
+                String timestamp = "2023-05-18T10:30:00Z";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
+                Date date;
+                try {
+                    date = sdf.parse(timestamp);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                ApiService.apiService.addHD(token, id_xe, date, date).enqueue(new Callback<apiThemHD>() {
                     @Override
                     public void onResponse(Call<apiThemHD> call, Response<apiThemHD> response) {
-                        Toast.makeText(DetailActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailActivity.this, "Call api thành công", Toast.LENGTH_SHORT).show();
+                        if (response.body().isSuccess()) {
+                            Toast.makeText(DetailActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DetailActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<apiThemHD> call, Throwable t) {
-                        Toast.makeText(DetailActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailActivity.this, "Call api error", Toast.LENGTH_SHORT).show();
 
                     }
                 });
