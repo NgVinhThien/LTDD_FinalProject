@@ -47,7 +47,7 @@
                 android:background="@drawable/custom_edittext"
                 android:ems="10"
                 android:hint="Nhập họ và tên"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:paddingStart="12dp"
                 android:shadowRadius="5"
                 app:layout_constraintEnd_toEndOf="parent"
