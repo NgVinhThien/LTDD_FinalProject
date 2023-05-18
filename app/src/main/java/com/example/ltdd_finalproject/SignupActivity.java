@@ -87,19 +87,19 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
                         else{
-                            ho_ten.setError("Nhập họ mật khẩu");
+                            password.setError("Nhập mật khẩu");
                         }
                     }
                     else{
-                        ho_ten.setError("Nhập họ số điện thoại");
+                        sdt.setError("Nhập số điện thoại");
                     }
                 }
                 else{
-                    ho_ten.setError("Nhập họ địa chỉ");
+                    dia_chi.setError("Nhập địa chỉ");
                 }
             }
             else{
-                ho_ten.setError("Nhập email");
+                email.setError("Nhập email");
             }
         }
         else{
