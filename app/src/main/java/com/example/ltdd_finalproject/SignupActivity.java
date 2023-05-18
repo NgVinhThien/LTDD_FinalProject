@@ -62,43 +62,48 @@ public class SignupActivity extends AppCompatActivity {
         String sdtData= sdt.getText().toString().trim();
         String matkhauData= password.getText().toString().trim();
 
-        if(hotenData.isEmpty()){
+        if(!hotenData.isEmpty()){
+            if(!emailData.isEmpty()){
+                if(!diachiData.isEmpty()){
+                    if(!sdtData.isEmpty()){
+                        if(matkhauData.isEmpty()){
+                            ApiService.apiService.signUpRequest(hotenData, diachiData, sdtData, emailData, matkhauData).enqueue(new Callback<apiSignUp>() {
+                                @Override
+                                public void onResponse(Call<apiSignUp> call, Response<apiSignUp> response) {
+                                    if(response.body()!=null && response.body().isSuccess()){
+                                        Toast.makeText(SignupActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                                        Intent intent= new Intent(SignupActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        Toast.makeText(SignupActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<apiSignUp> call, Throwable t) {
+                                    Toast.makeText(SignupActivity.this, "Call api error", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                        else{
+                            ho_ten.setError("Nhập họ mật khẩu");
+                        }
+                    }
+                    else{
+                        ho_ten.setError("Nhập họ số điện thoại");
+                    }
+                }
+                else{
+                    ho_ten.setError("Nhập họ địa chỉ");
+                }
+            }
+            else{
+                ho_ten.setError("Nhập email");
+            }
+        }
+        else{
             ho_ten.setError("Nhập họ tên");
         }
-        if(emailData.isEmpty()){
-            ho_ten.setError("Nhập họ email");
-        }
-        if(diachiData.isEmpty()){
-            ho_ten.setError("Nhập họ địa chỉ");
-        }
-        if(sdtData.isEmpty()){
-            ho_ten.setError("Nhập họ số điện thoại");
-        }
-        if(matkhauData.isEmpty()){
-            ho_ten.setError("Nhập họ mật khẩu");
-        }
-
-        ApiService.apiService.signUpRequest(hotenData, diachiData, sdtData, emailData, matkhauData).enqueue(new Callback<apiSignUp>() {
-            @Override
-            public void onResponse(Call<apiSignUp> call, Response<apiSignUp> response) {
-                if(response.body()!=null && response.body().isSuccess()){
-                    Toast.makeText(SignupActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(SignupActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    Toast.makeText(SignupActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<apiSignUp> call, Throwable t) {
-                Toast.makeText(SignupActivity.this, "Call api error", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
     }
 }
