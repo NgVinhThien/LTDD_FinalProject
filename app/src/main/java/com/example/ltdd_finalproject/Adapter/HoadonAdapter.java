@@ -1,6 +1,7 @@
 package com.example.ltdd_finalproject.Adapter;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,15 @@ import com.example.ltdd_finalproject.R;
 
 import java.util.List;
 
-public class HoadonAdapter  extends RecyclerView.Adapter<HoadonAdapter.HoadonViewHolder>{
+public class HoadonAdapter extends RecyclerView.Adapter<HoadonAdapter.HoadonViewHolder>{
 
     private List<Hoadon> mListHoadon;
+    private Context mContext;
 
-    public HoadonAdapter(List<Hoadon> mListHoadon) {
+    public HoadonAdapter(List<Hoadon> mListHoadon, Context mContext) {
         this.mListHoadon = mListHoadon;
+        this.mContext = mContext;
     }
-
 
     @NonNull
     @Override
@@ -33,43 +35,42 @@ public class HoadonAdapter  extends RecyclerView.Adapter<HoadonAdapter.HoadonVie
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hoadon, parent, false);
         return new HoadonViewHolder(view);
     }
+    public void setData(List<Hoadon> list){
+        this.mListHoadon= list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull HoadonViewHolder holder, int position) {
         Hoadon hoadon= mListHoadon.get(position);
-        if(hoadon== null){
+        if(hoadon == null){
             return;
         }
-        holder.tv_tenxe.setText(String.valueOf(hoadon.getId()));
-        holder.tv_ngaynhan.setText(String.valueOf(hoadon.getNgay_dat()));
+        holder.tvTenXe.setText(String.valueOf(hoadon.getId_xe()));
+        holder.tvNgayNhan.setText(String.valueOf(hoadon.getNgay_nhan()));
 
     }
-
     @Override
     public int getItemCount() {
-        if(mListHoadon!= null){
+        if(mListHoadon != null){
             return mListHoadon.size();
         }
         return 0;
     }
 
-
-
-
-
     public class HoadonViewHolder extends RecyclerView.ViewHolder{
-        private LinearLayout layout_hodon;
-        private ImageView imv_hoadon;
-        private TextView tv_tenxe;
-        private TextView tv_ngaynhan;
+
+        private TextView tvTenXe;
+        private TextView tvNgayNhan;
 
         public HoadonViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvTenXe=  itemView.findViewById(R.id.tv_tenxe);
+            tvNgayNhan= itemView.findViewById(R.id.tv_ngaynhan);
 
-            layout_hodon= itemView.findViewById(R.id.layout_hoadon);
-            imv_hoadon= layout_hodon.findViewById(R.id.imv_hoadon);
-            tv_tenxe= layout_hodon.findViewById(R.id.tv_tenxe);
-            tv_ngaynhan= layout_hodon.findViewById(R.id.tv_ngaynhan);
+
         }
     }
+
+
 }

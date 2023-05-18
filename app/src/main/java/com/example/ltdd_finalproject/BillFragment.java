@@ -28,52 +28,53 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BillFragment extends Fragment {
-    private RecyclerView rcv_hoadon;
+    private RecyclerView rcvHoadon;
     private List<Hoadon> mListHoadon;
-    private HoadonAdapter mhoadonAdapter;
+    private HoadonAdapter mHoadonAdapter;
+
+    private View mView;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_bill, container, false);
-
-        rcv_hoadon= view.findViewById(R.id.bills_list);
+        mView = inflater.inflate(R.layout.fragment_bill, container, false);
 
 
-
-
-
-
+        rcvHoadon= mView.findViewById(R.id.billList);
         getHoadonRequest();
 
-        return view;
+        return mView;
     }
     private void getHoadonRequest(){
-
-
         String token= DataLocalManager.getToken();
-        Log.e("token: ", token);
         ApiService.apiService.getHoadon(token).enqueue(new Callback<apiHoadon>() {
             @Override
             public void onResponse(Call<apiHoadon> call, Response<apiHoadon> response) {
+                Toast.makeText(requireContext(), "call hoa don THANH CONG", Toast.LENGTH_SHORT).show();
                 mListHoadon= new ArrayList<>();
-                mListHoadon= response.body().getData();
-                mhoadonAdapter= new HoadonAdapter(mListHoadon);
+                mListHoadon= response.body().getHoa_don();
+
+                mHoadonAdapter= new HoadonAdapter(mListHoadon, requireContext());
                 LinearLayoutManager linearLayoutManager= new LinearLayoutManager(requireContext());
-                rcv_hoadon.setLayoutManager(linearLayoutManager);
+                rcvHoadon.setLayoutManager(linearLayoutManager);
 
-                DividerItemDecoration itemDecoration= new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
-                rcv_hoadon.addItemDecoration(itemDecoration);
-
-
-
-                rcv_hoadon.setAdapter(mhoadonAdapter);
+//                DividerItemDecoration itemDecoration= new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
+//                rcvHoadon.addItemDecoration(itemDecoration);
+                mHoadonAdapter.setData(mListHoadon);
+                rcvHoadon.setAdapter(mHoadonAdapter);
             }
+
             @Override
             public void onFailure(Call<apiHoadon> call, Throwable t) {
-                Toast.makeText(requireContext(), "Call api hoa don error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "call hoa don error", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
 }
+
+//
+//mListHoadon= response.body();
+//        HoadonAdapter hoadonAdapter= new HoadonAdapter(mListHoadon);
+//        rcvHoadon.setAdapter(hoadonAdapter);

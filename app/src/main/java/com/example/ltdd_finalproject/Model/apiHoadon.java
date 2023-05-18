@@ -5,21 +5,32 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class apiHoadon {
-    @SerializedName("data")
-    private List<Hoadon> data;
+    @SerializedName("success")
+    private boolean success;
+    @SerializedName("hoa_don")
+    private List<Hoadon> hoa_don;
 
     public apiHoadon() {
     }
 
-    public apiHoadon(List<Hoadon> data) {
-        this.data = data;
+    public apiHoadon(boolean success, List<Hoadon> hoa_don) {
+        this.success = success;
+        this.hoa_don = hoa_don;
     }
 
-    public List<Hoadon> getData() {
-        return data;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setData(List<Hoadon> data) {
-        this.data = data;
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public List<Hoadon> getHoa_don() {
+        return hoa_don;
+    }
+
+    public void setHoa_don(List<Hoadon> hoa_don) {
+        this.hoa_don = hoa_don;
     }
 }

@@ -77,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
                             DataLocalManager.setToken(response.body().getToken());
                             List<khach_hang> listKH= new ArrayList<>();
                             listKH= response.body().getKhach_hangs();
+                            DataLocalManager.setHoTen(listKH.get(0).getHo_ten());
                             DataLocalManager.setIdKH(listKH.get(0).getId());
+                            DataLocalManager.setDiaChi(listKH.get(0).getDia_chi());
+                            DataLocalManager.setEmail(listKH.get(0).getEmail());
+                            DataLocalManager.setSdt(listKH.get(0).getSdt());
                             Intent intent= new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
