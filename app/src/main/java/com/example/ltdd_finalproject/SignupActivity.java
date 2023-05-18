@@ -66,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
             if(!emailData.isEmpty()){
                 if(!diachiData.isEmpty()){
                     if(!sdtData.isEmpty()){
-                        if(matkhauData.isEmpty()){
+                        if(!matkhauData.isEmpty()){
                             ApiService.apiService.signUpRequest(hotenData, diachiData, sdtData, emailData, matkhauData).enqueue(new Callback<apiSignUp>() {
                                 @Override
                                 public void onResponse(Call<apiSignUp> call, Response<apiSignUp> response) {
