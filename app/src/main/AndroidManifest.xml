@@ -36,6 +36,9 @@
         <activity
             android:name=".DanhMucIdActivity"
             android:exported="false"/>
+        <activity
+            android:name=".HangXeIdActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
