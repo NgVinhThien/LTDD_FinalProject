@@ -2,6 +2,7 @@ package com.example.ltdd_finalproject.Api;
 
 
 import com.example.ltdd_finalproject.Model.Login;
+import com.example.ltdd_finalproject.Model.apiSignUp;
 import com.example.ltdd_finalproject.Model.apiXe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,11 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/signIn")
     Call<Login> loginRequest(@Field("email") String email, @Field("password") String password);
+
     @GET("/xe/all")
     Call<apiXe> getListXe();
+    @FormUrlEncoded
+    @POST("/signUp")
+    Call<apiSignUp> signUpRequest(@Field("ho_ten") String ho_ten, @Field("dia_chi") String dia_chi, @Field("sdt") String sdt, @Field("email") String email, @Field("password") String password);
+
 }

@@ -54,31 +54,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent= new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
-
-
             }
         });
 
     }
     private void sendloginRequest(){
 //        LoginInfo loginInfo= new LoginInfo("thien1@gmail.com", "123");
-        String email= edtEmail.getText().toString();
-        String pass= edtPassword.getText().toString();
-        if(email.length()==0 || pass.length()==0){
-            Toast.makeText(this, "Vui lòng điền thông tin đăng nhập", Toast.LENGTH_SHORT).show();
+        String email= edtEmail.getText().toString().trim();
+        String pass= edtPassword.getText().toString().trim();
+        if(email.isEmpty()){
+            edtEmail.setError("Vui lòng nhập email");
+        }
+        if(pass.isEmpty()){
+            edtPassword.setError("Vui lòng nhập mật khẩu");
         }
         ApiService.apiService.loginRequest(email, pass).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-                if(response.body().isSuccess()){
+                if(response.body()!= null && response.body().isSuccess()){
                     Intent intent= new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
