@@ -49,7 +49,9 @@ public interface ApiService {
     Call<List<HangXe>> getListHangXe();
     @GET("/danhmuc")
     Call<List<DanhMuc>> getListDanhMuc();
-
+    @GET("hangxe/{id}")
+    Call<List<Xe>> getHangXe(@Path("id") int id);
     @GET("danhmuc/{id}")
     Call<List<Xe>> getDanhMuc(@Path("id") int id);
+
 }

@@ -1,6 +1,7 @@
 package com.example.ltdd_finalproject.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ltdd_finalproject.DanhMucIdActivity;
+import com.example.ltdd_finalproject.HangXeIdActivity;
 import com.example.ltdd_finalproject.Model.DanhMuc;
 import com.example.ltdd_finalproject.Model.HangXe;
 import com.example.ltdd_finalproject.R;
@@ -46,6 +49,14 @@ public class HangXeAdapter extends  RecyclerView.Adapter<HangXeAdapter.HangXeVie
         }
         holder.company_name.setText(hangXe.getTen_hang_xe());
         Glide.with(mContext).load(hangXe.getLogo()).into(holder.image_company);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, HangXeIdActivity.class);
+                intent.putExtra("id_hang_xe", hangXe.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
